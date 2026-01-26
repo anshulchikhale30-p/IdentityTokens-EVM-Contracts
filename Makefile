@@ -9,7 +9,12 @@ all: clean remove install update build
 clean:; forge clean
 
 # Remove git modules (useful for resetting dependencies)
-remove:; rm -rf .gitmodules && rm -rf .git/modules/* && rm -rf lib && touch .gitmodules && git add . && git commit -m "modules"
+remove:
+	@echo "Warning: This will remove all git submodules and lib/. Press Ctrl+C to cancel."
+	@read -p "Continue? [y/N] " confirm && [ "$$confirm" = "y" ]
+	rm -rf .gitmodules .git/modules/* lib
+	touch .gitmodules
+	@echo "Modules removed. Run 'git add . && git commit' manually if desired."
 
 # Install OpenZeppelin Contracts
 install:; forge install OpenZeppelin/openzeppelin-contracts
