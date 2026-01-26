@@ -44,7 +44,7 @@ contract IdentityToken is ERC721, Ownable, IIdentityToken {
     // --- Trust Graph ---
 
     function endorse(uint256 fromId, uint256 toId, string calldata connType, uint256 ttl) external override onlyTokenOwner(fromId) {
-        if (ownerOf(toId) == address(0)) revert Errors.TargetInvalid();
+        if (_ownerOf(toId) == address(0)) revert Errors.TargetInvalid();
         if (fromId == toId) revert Errors.SelfEndorsement();
         if (_states[fromId].isCompromised) revert Errors.EndorserCompromised();
 
