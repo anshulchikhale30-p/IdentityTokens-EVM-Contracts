@@ -34,4 +34,4 @@ number_underscore = "preserve"
 
 # FIXED: Changed [ci] to [profile.ci] to fix the warning
 [profile.ci]
-fuzz_runs = 1000
+runs = 1000
