@@ -103,6 +103,10 @@ contract IdentityToken is ERC721, Ownable, IIdentityToken {
 
     function recoverIdentity(uint256 tokenId) external override {
         if (msg.sender != _states[tokenId].backupWallet) revert Errors.NotBackupWallet();
+        if (!_states[tokenId].isCompromised) revert Errors.IdentityNotCompromised();
+        _states[tokenId].isCompromised = false;
+        delete _states[tokenId].pendingBackupWallet;
+        delete _states[tokenId].backupUnlockTime;
         _transfer(ownerOf(tokenId), msg.sender, tokenId);
         emit Events.IdentityRecovered(tokenId, msg.sender);
     }
