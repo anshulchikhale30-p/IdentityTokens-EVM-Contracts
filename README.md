@@ -22,7 +22,7 @@ To explore the design and security trade-offs of **Decentralized Identity Tokens
 - ZK / privacy guarantees (future work)
 
 ## Status
-🚧 Work in progress (1-week learning prototype)
+DONE (1-week learning prototype)
 
 ## Relation to DIT 2026
 This project aligns with the proposed **Decentralized Identity Tokens (DIT)** direction and is intended purely as a learning and exploration exercise before the proposal phase.
