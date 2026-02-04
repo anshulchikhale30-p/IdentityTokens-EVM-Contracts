@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24; 
+pragma solidity ^0.8.13;
 
-// The contract name must match what the test expects ("Sample")
 contract Sample {
-    uint256 public number;
+    string public message;
 
-    function setNumber(uint256 newNumber) public {
-        number = newNumber;
+    // Matches: sample = new Sample("Initial Message");
+    constructor(string memory _message) {
+        message = _message;
     }
 
-    function increment() public {
-        number++;
+    // Matches: sample.setMessage("Hello Foundry");
+    function setMessage(string memory _newMessage) public {
+        message = _newMessage;
     }
 }
