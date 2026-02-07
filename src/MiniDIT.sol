@@ -18,6 +18,19 @@ contract MiniDIT is ERC721 {
         string linkedin;
         string ageGroup; // e.g. "18+", "21+", etc.
         bool compromised;
+
+       function _beforeTokenTransfer(
+    address from,
+    address to,
+    uint256 tokenId,
+    uint256 batchSize
+) internal override {
+    if (from != address(0) && to != address(0)) {
+        revert("MiniDIT: identity tokens are non-transferable");
+    }
+    super._beforeTokenTransfer(from, to, tokenId, batchSize);
+}
+
     }
 
     // tokenId => metadata
