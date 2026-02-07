@@ -6,4 +6,4 @@
 | IdentityCard.tsx   | Identity + events read  |
 | EndorseIdentity.tsx| endorse()               |
 | Revoke button      | revokeEndorsement()     |
-| Compromise button  | signalCompromise()      |
+| Compromise button  | markCompromised(tokenId)|
