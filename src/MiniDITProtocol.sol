@@ -1,61 +1,48 @@
-/*
-PROTOCOL FLOW (Mini DIT)
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
 
-1. User self-mints an identity token
-2. Identity tokens can endorse other identity tokens
-3. Endorsements are revocable by the endorser
-4. Identity owners can signal compromise
-5. Protocol exposes raw facts; trust logic is external
-*/
+/// @title MiniDITProtocol
+/// @notice Protocol-level specification for Mini DIT (documentation-only contract)
+abstract contract MiniDITProtocol {
+    /*//////////////////////////////////////////////////////////////
+                                STRUCTS
+    //////////////////////////////////////////////////////////////*/
 
+    struct Identity {
+        address owner;
+        bool compromised;
+    }
 
+    struct Endorsement {
+        uint256 fromTokenId;
+        uint256 toTokenId;
+        uint256 timestamp;
+    }
 
-//Identity Token
-//Self-issued
-//Non-transferable (or explicitly noted if transferable is experimental)
-struct Identity {
-    address owner;
-    bool compromised;
+    struct RevocationSignal {
+        uint256 fromTokenId;
+        uint256 toTokenId;
+        uint256 timestamp;
+    }
+
+    /*//////////////////////////////////////////////////////////////
+                                EVENTS
+    //////////////////////////////////////////////////////////////*/
+
+    event IdentityCreated(uint256 indexed tokenId, address indexed owner);
+    event Endorsed(uint256 indexed fromTokenId, uint256 indexed toTokenId);
+    event Revoked(uint256 indexed fromTokenId, uint256 indexed toTokenId);
+    event IdentityCompromised(uint256 indexed tokenId);
+
+    /*//////////////////////////////////////////////////////////////
+                        FUNCTION SIGNATURES
+    //////////////////////////////////////////////////////////////*/
+
+    function mintIdentity() external virtual returns (uint256);
+
+    function endorse(uint256 fromTokenId, uint256 toTokenId) external virtual;
+
+    function revoke(uint256 fromTokenId, uint256 toTokenId) external virtual;
+
+    function markCompromised(uint256 tokenId) external virtual;
 }
-
-//Endorsements (token → token)
-//Endorsements are claims,not trust decisions
-struct Endorsement {
-    uint256 fromId;
-    uint256 toId;
-    bool active;
-}
-
-//Revocation & Signals
-//Signals ≠ deletion
-struct RevocationSignal {
-    uint256 identityId;
-    string reason;
-    uint256 timestamp;
-}
-
-//Events = protocol interface
-event IdentityMinted(uint256 indexed id, address indexed owner);
-event Endorsed(uint256 indexed fromId, uint256 indexed toId);
-event EndorsementRevoked(uint256 indexed fromId, uint256 indexed toId);
-event IdentityCompromised(uint256 indexed id);
-
-//Identity minting
-function mintIdentity() external {
-    require(ownerToId[msg.sender] == 0, "Already has identity");
-    ...
-}
-
-//Endorsement rules
-require(!identities[fromId].compromised, "Compromised identity");
-
-//Revocation rules
-require(msg.sender == identities[fromId].owner);
-
-
-// NOTE:
-// - No trust scoring
-// - No sybil resistance
-// - No off-chain verification
-// - No governance
-
