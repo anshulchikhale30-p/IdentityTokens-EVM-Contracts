@@ -44,8 +44,6 @@ Flow:
 - Calls `endorse(fromId, toId)`
 - Protocol emits `Endorsed(fromId, toId)`
 
-Rules:
-- Endorser identity must not be compromised
 
 ---
 
