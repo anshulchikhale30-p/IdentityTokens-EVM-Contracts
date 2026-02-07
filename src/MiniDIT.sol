@@ -50,24 +50,29 @@ contract MiniDIT is ERC721 {
      * @notice Mint a self-issued identity token
      */
     function mintIdentity(
-        string calldata name,
-        string calldata github,
-        string calldata linkedin,
-        string calldata ageGroup
-    ) external {
-        uint256 tokenId = nextTokenId++;
-        _safeMint(msg.sender, tokenId);
+    string memory name,
+    string memory github,
+    string memory linkedin,
+    string memory ageGroup
+) external {
+    require(balanceOf(msg.sender) == 0, "Already has identity");
 
-        identities[tokenId] = IdentityMetadata({
-            name: name,
-            github: github,
-            linkedin: linkedin,
-            ageGroup: ageGroup,
-            compromised: false
-        });
+    uint256 tokenId = nextTokenId;
+    nextTokenId++;
 
-        emit IdentityMinted(msg.sender, tokenId);
-    }
+    _safeMint(msg.sender, tokenId);
+
+    identities[tokenId] = IdentityMetadata({
+        name: name,
+        github: github,
+        linkedin: linkedin,
+        ageGroup: ageGroup,
+        compromised: false
+    });
+
+    emit IdentityMinted(msg.sender, tokenId);
+}
+
 
     /**
      * @notice Endorse another identity token
