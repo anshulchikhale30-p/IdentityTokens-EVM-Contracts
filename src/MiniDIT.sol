@@ -60,12 +60,21 @@ contract MiniDIT is ERC721 {
      * @notice Endorse another identity token
      */
     function endorse(uint256 fromTokenId, uint256 toTokenId) external {
-        require(ownerOf(fromTokenId) == msg.sender, "Not token owner");
-        require(fromTokenId != toTokenId, "Self endorsement not allowed");
+    // Caller must own the endorsing identity
+    require(ownerOf(fromTokenId) == msg.sender, "Not token owner");
 
-        endorsements[fromTokenId][toTokenId] = true;
-        emit Endorsed(fromTokenId, toTokenId);
-    }
+    // Prevent self-endorsement
+    require(fromTokenId != toTokenId, "Self endorsement not allowed");
+
+    // Endorsing identity must not be compromised
+    require(!identities[fromTokenId].compromised, "Compromised identity cannot endorse");
+
+    // Target identity must exist
+    ownerOf(toTokenId); // ERC721 reverts if token does not exist
+
+    endorsements[fromTokenId][toTokenId] = true;
+    emit Endorsed(fromTokenId, toTokenId);
+}
 
     /**
      * @notice Revoke an endorsement
