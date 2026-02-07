@@ -10,7 +10,7 @@ Actor: User
 
 Flow:
 - User connects wallet
-- Calls `mintIdentity()`
+- Calls `mintIdentity(name, github, linkedin, ageGroup)`
 - Protocol emits `IdentityMinted(id, owner)`
 
 UI:
