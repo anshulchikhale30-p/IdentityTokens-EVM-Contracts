@@ -1,42 +1,34 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title MiniDITProtocol
-/// @notice Protocol-level specification for Mini DIT (documentation-only contract)
 abstract contract MiniDITProtocol {
-    /*//////////////////////////////////////////////////////////////
-                                STRUCTS
-    //////////////////////////////////////////////////////////////*/
-
-    struct Identity {
-        address owner;
+    struct IdentityMetadata {
+        string name;
+        string github;
+        string linkedin;
+        string ageGroup;
         bool compromised;
     }
 
-   struct Endorsement {
-        uint256 fromTokenId;
-        uint256 toTokenId;
-        uint256 timestamp;
-    }
-   
-    /*//////////////////////////////////////////////////////////////
-                                EVENTS
-    //////////////////////////////////////////////////////////////*/
-
-    event IdentityCreated(uint256 indexed tokenId, address indexed owner);
+    /// EVENTS (match MiniDIT exactly)
+    event IdentityMinted(address indexed owner, uint256 indexed tokenId);
     event Endorsed(uint256 indexed fromTokenId, uint256 indexed toTokenId);
     event Revoked(uint256 indexed fromTokenId, uint256 indexed toTokenId);
-    event IdentityCompromised(uint256 indexed tokenId);
+    event Compromised(uint256 indexed tokenId);
 
-    /*//////////////////////////////////////////////////////////////
-                        FUNCTION SIGNATURES
-    //////////////////////////////////////////////////////////////*/
-
-    function mintIdentity() external virtual returns (uint256);
+    /// FUNCTIONS (match signatures exactly)
+    function mintIdentity(
+        string calldata name,
+        string calldata github,
+        string calldata linkedin,
+        string calldata ageGroup
+    ) external virtual;
 
     function endorse(uint256 fromTokenId, uint256 toTokenId) external virtual;
 
-    function revoke(uint256 fromTokenId, uint256 toTokenId) external virtual;
+    function revokeEndorsement(uint256 fromTokenId, uint256 toTokenId)
+        external
+        virtual;
 
     function markCompromised(uint256 tokenId) external virtual;
 }
