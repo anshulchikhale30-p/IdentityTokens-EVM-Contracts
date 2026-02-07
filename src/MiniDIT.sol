@@ -18,6 +18,7 @@ contract MiniDIT is ERC721 {
         string linkedin;
         string ageGroup; // e.g. "18+", "21+", etc.
         bool compromised;
+      }
 
 function _update(address to, uint256 tokenId, address auth) internal override returns (address) {
     address from = _ownerOf(tokenId);
