@@ -20,13 +20,18 @@ contract MiniDIT is ERC721 {
         bool compromised;
       }
 
-function _update(address to, uint256 tokenId, address auth) internal override returns (address) {
-    address from = _ownerOf(tokenId);
-    if (from != address(0) && to != address(0)) {
+function _update(
+    address to,
+    uint256 tokenId,
+    address auth
+) internal override returns (address) {
+    if (to != address(0) && auth != address(0)) {
         revert("MiniDIT: identity tokens are non-transferable");
     }
+
     return super._update(to, tokenId, auth);
 }
+
 
     // tokenId => metadata
     mapping(uint256 => IdentityMetadata) public identities;
@@ -44,7 +49,7 @@ function _update(address to, uint256 tokenId, address auth) internal override re
     /**
      * @notice Mint a self-issued identity token
      */
-    function mintIdentity(
+   function mintIdentity(
     string memory name,
     string memory github,
     string memory linkedin,
@@ -69,31 +74,20 @@ function _update(address to, uint256 tokenId, address auth) internal override re
 }
 
 
+
     /**
      * @notice Endorse another identity token
      */
-    function endorse(uint256 fromTokenId, uint256 toTokenId) external {
+   function endorse(uint256 fromTokenId, uint256 toTokenId) external {
     require(ownerOf(fromTokenId) == msg.sender, "Not token owner");
-    require(fromTokenId != toTokenId, "Self endorsement not allowed");
-
-    // Endorser must not be compromised
-    require(
-        !identities[fromTokenId].compromised,
-        "Compromised identity cannot endorse"
-    );
-
-    // Target must exist (ERC721 ownerOf reverts if not)
-    ownerOf(toTokenId);
-
-    // Target must not be compromised
-    require(
-        !identities[toTokenId].compromised,
-        "Cannot endorse compromised target"
-    );
+    require(!identities[fromTokenId].compromised, "Endorser is compromised");
+    require(!identities[toTokenId].compromised, "Target is compromised");
 
     endorsements[fromTokenId][toTokenId] = true;
+
     emit Endorsed(fromTokenId, toTokenId);
 }
+
 
 
     /**
