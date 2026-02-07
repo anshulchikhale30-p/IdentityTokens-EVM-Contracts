@@ -105,6 +105,7 @@ function _update(
      */
     function markCompromised(uint256 tokenId) external {
         require(ownerOf(tokenId) == msg.sender, "Not token owner");
+        require(!identities[tokenId].compromised, "Already compromised");
 
         identities[tokenId].compromised = true;
         emit IdentityCompromised(tokenId);
