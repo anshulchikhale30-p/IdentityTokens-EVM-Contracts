@@ -101,7 +101,7 @@ function _update(address to, uint256 tokenId, address auth) internal override re
      */
     function revokeEndorsement(uint256 fromTokenId, uint256 toTokenId) external {
         require(ownerOf(fromTokenId) == msg.sender, "Not token owner");
-
+        require(endorsements[fromTokenId][toTokenId], "No active endorsement");
         endorsements[fromTokenId][toTokenId] = false;
         emit EndorsementRevoked(fromTokenId, toTokenId);
     }
