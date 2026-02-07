@@ -324,3 +324,29 @@ TSWLatexianTemp*
 # option is specified. Footnotes are the stored in a file with suffix Notes.bib.
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
+
+
+node_modules/
+npm-debug.log
+yarn-error.log
+
+
+# Foundry
+out/
+cache/
+broadcast/
+lib/ # If you are using git submodules, sometimes you might want to ignore this, but usually, it's tracked as a submodule.
+
+# Hardhat (if applicable)
+artifacts/
+typechain-types/
+coverage/
+coverage.json
+
+.env
+.env.local
+.env.*.local
+
+.DS_Store
+.vscode/
+.idea/
