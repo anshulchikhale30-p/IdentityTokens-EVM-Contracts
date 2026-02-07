@@ -13,18 +13,12 @@ abstract contract MiniDITProtocol {
         bool compromised;
     }
 
-    struct Endorsement {
+   struct Endorsement {
         uint256 fromTokenId;
         uint256 toTokenId;
         uint256 timestamp;
     }
-
-    struct RevocationSignal {
-        uint256 fromTokenId;
-        uint256 toTokenId;
-        uint256 timestamp;
-    }
-
+   
     /*//////////////////////////////////////////////////////////////
                                 EVENTS
     //////////////////////////////////////////////////////////////*/
