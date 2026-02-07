@@ -66,9 +66,9 @@ Note:
 Actor: Identity owner
 
 Flow:
-- User calls `signalCompromise(id, reason)`
+- User calls `markCompromised(tokenId)`
 - Protocol emits `IdentityCompromised(id)`
 
 Effect:
 - Identity remains readable
-- Future endorsements blocked
+- Future endorsements blocked (if enforced — see contract)
