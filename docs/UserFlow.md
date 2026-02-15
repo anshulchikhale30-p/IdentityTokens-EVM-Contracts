@@ -1,72 +1,257 @@
-# Mini DIT – User Flow
+1. Visit DIT Frontend
 
-This document describes the explicit user flow exposed by the Mini DIT protocol.
-The UI reflects protocol facts only; interpretation is left to external systems.
-
----
-
-## 1. Mint Identity
 Actor: User
 
 Flow:
-- User connects wallet
-- Calls `mintIdentity(name, github, linkedin, ageGroup)`
-- Protocol emits `IdentityMinted(id, owner)`
+
+User opens Mini DIT frontend
+
+Frontend loads protocol state (read-only)
 
 UI:
-- Shows Identity Token ID
-- Shows status: Active / Compromised
 
----
+“Connect Wallet” CTA
 
-## 2. View Identity (Read-only)
-Actor: Any user
+No trust score shown
+
+No verification claims
+
+2. Connect Wallet
+
+Actor: User
 
 Flow:
-- Fetch identity data by tokenId
-- Read:
-  - owner
-  - compromised flag
-  - endorsements in/out
+
+User connects EVM wallet
+
+Wallet address becomes session identity
 
 UI:
-- Identity card
-- No trust score
-- No validity judgment
 
----
+Wallet address displayed
 
-## 3. Endorse Identity
-Actor: Identity owner
+Existing identity token (if any) detected
+
+3. Mint Identity Token
+
+Actor: User
 
 Flow:
-- User selects `fromId` and `toId`
-- Calls `endorse(fromId, toId)`
-- Protocol emits `Endorsed(fromId, toId)`
 
+User calls
+mintIdentity(name, github, linkedin, ageGroup)
 
----
+Protocol mints Identity NFT
 
-## 4. Revoke Endorsement
+Protocol emits
+IdentityMinted(tokenId, owner)
+
+On-chain State:
+
+Identity NFT stored on-chain
+
+Identity metadata publicly readable
+
+UI:
+
+Displays Identity Token ID
+
+Displays owner address
+
+Status: Active
+
+4. Add Identity Claims
+
+Actor: Identity Owner
+
+Flow:
+
+User adds identity-related claims
+
+Claims are stored as facts, not validations
+
+On-chain State:
+
+Claims linked to identity token
+
+No truth evaluation by protocol
+
+UI:
+
+Shows claims as “Self-declared”
+
+No verification badge
+
+5. View Identity (Read-only)
+
+Actor: Any User / Verifier
+
+Flow:
+
+Fetch identity by tokenId
+
+Read:
+
+Owner
+
+Identity metadata
+
+Endorsements (incoming / outgoing)
+
+Compromise or revocation signals
+
+UI:
+
+Identity card
+
+Public facts only
+
+❌ No trust score
+
+❌ No accept/reject label
+
+6. Endorse Identity
+
+Actor: Identity Owner (Endorser)
+
+Flow:
+
+User selects:
+
+fromId (their identity)
+
+toId (target identity)
+
+Calls
+endorse(fromId, toId)
+
+Protocol emits
+Endorsed(fromId, toId)
+
+On-chain State:
+
+Endorsement recorded permanently
+
+UI:
+
+Shows endorsement link
+
+Timestamp visible
+
+7. Revoke Endorsement
+
 Actor: Endorser
 
 Flow:
-- User calls `revokeEndorsement(fromId, toId)`
-- Protocol emits `EndorsementRevoked(fromId, toId)`
 
-Note:
-- Revocation ≠ deletion
-- History remains visible
+User calls
+revokeEndorsement(fromId, toId)
 
----
+Protocol emits
+EndorsementRevoked(fromId, toId)
 
-## 5. Signal Compromise
-Actor: Identity owner
+Important:
+
+Revocation ≠ deletion
+
+History remains immutable
+
+UI:
+
+Shows endorsement as revoked
+
+Previous endorsement still visible
+
+8. Signal Compromise / Revocation
+
+Actor: Identity Owner
 
 Flow:
-- User calls `markCompromised(tokenId)`
-- Protocol emits `IdentityCompromised(id)`
+
+User calls
+markCompromised(tokenId)
+
+Protocol emits
+IdentityCompromised(tokenId)
 
 Effect:
-- Identity remains readable
-- Future endorsements blocked (if enforced — see contract)
+
+Identity remains readable
+
+Compromise signal becomes permanent
+
+Future endorsements may be blocked (contract-level rule)
+
+UI:
+
+Status changes to Compromised
+
+Warning banner displayed
+
+9. Wallet Rotation (Identity Transfer)
+
+Actor: Identity Owner
+
+Flow:
+
+User transfers Identity NFT to a new wallet
+
+Ownership updated on-chain
+
+On-chain State:
+
+Identity persists
+
+History remains intact
+
+UI:
+
+Owner address updated
+
+Identity continuity preserved
+
+10. External Verification & Trust Decision
+
+Actor: External Application / Organization
+
+Flow:
+
+External system:
+
+Reads identity token data
+
+Reads endorsements and revocations
+
+Reads compromise signals
+
+Applies its own trust rules
+
+Makes independent decision
+
+Possible Outcomes:
+
+Accept
+
+Reject
+
+Manual Review
+
+Note:
+
+Mini DIT never decides trust — it only provides verifiable signals.
+
+Summary
+
+✔ Protocol stores facts
+
+✔ Endorsements are signals
+
+✔ Revocations are visible
+
+✔ Compromises are explicit
+
+❌ No trust score
+
+❌ No validity judgment
+
+❌ No central authorit
