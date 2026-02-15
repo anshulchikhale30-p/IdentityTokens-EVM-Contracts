@@ -1,69 +1,80 @@
-# Mini DIT – User Flow
-
-This document describes the **explicit user flow** exposed by the Mini DIT protocol.
-
-> The frontend reflects **protocol facts only**.  
-> **Trust interpretation is delegated to external systems.**
-
----
-
-## High-Level Flow Diagram
-
-```mermaid
-flowchart LR
+flowchart TB
 
 %% =========================
-%% USER
+%% WALLET
 %% =========================
-subgraph User
-    A1[Visit DIT Frontend]
-    A2[Connect Wallet]
-    A3[Mint Identity NFT]
-    A4[Add Identity Claims]
+subgraph WALLET["Wallet Session"]
+    W1[Open DIT App]
+    W2[Connect Wallet]
 end
 
 %% =========================
-%% PROTOCOL (ON-CHAIN)
+%% OVERVIEW
 %% =========================
-subgraph Protocol["DIT Protocol (On-Chain Source of Truth)"]
-    P1[Identity NFT Stored On-Chain]
-    P2[Identity Data Publicly Readable]
-    P3[Endorsements Recorded]
-    P4[Endorsements Revoked]
-    P5[Compromise Signal Stored]
-    P6[Identity Transferable]
+subgraph OVERVIEW["Overview"]
+    O1[Protocol Summary]
+    O2[Identity Status Check]
 end
 
 %% =========================
-%% EXTERNAL VERIFIERS
+%% ONBOARDING
 %% =========================
-subgraph Verifier["External Applications / Verifiers"]
-    V1[Read Identity Data]
-    V2[Read Endorsements & Revocations]
-    V3[Read Compromise Signals]
-    V4[Apply Own Trust Rules]
-    V5{Trust Decision}
-    V6[Accept]
-    V7[Reject]
-    V8[Manual Review]
+subgraph ONBOARDING["Onboarding"]
+    OB1[Check Existing Identity]
+    OB2[Mint Identity NFT]
 end
 
-%% USER FLOW
-A1 --> A2 --> A3 --> A4 --> P1
-P1 --> P2
+%% =========================
+%% DASHBOARD
+%% =========================
+subgraph DASHBOARD["Dashboard"]
+    D1[View My Identity Card]
+    D2[View Identity Metadata]
+    D3[View Endorsements In / Out]
+    D4[View Compromise Status]
+end
 
-%% ENDORSEMENT FLOW
-P2 --> P3 --> P4 --> P5 --> P6
+%% =========================
+%% MANAGE IDENTITY
+%% =========================
+subgraph MANAGE["Manage Identity"]
+    M1[Add / Update Claims]
+    M2[Transfer Identity NFT]
+end
 
-%% VERIFIER FLOW
-P1 --> V1
-P3 --> V2
-P4 --> V2
-P5 --> V3
-V1 --> V4
-V2 --> V4
-V3 --> V4
-V4 --> V5
-V5 -->|Accept| V6
-V5 -->|Reject| V7
-V5 -->|Manual Review| V8
+%% =========================
+%% ENDORSEMENTS
+%% =========================
+subgraph ENDORSE["Endorsements"]
+    E1[Browse Other Identities]
+    E2[Endorse Identity]
+    E3[Revoke Endorsement]
+end
+
+%% =========================
+%% REVOCATION & SIGNALS
+%% =========================
+subgraph SIGNALS["Revocation & Signals"]
+    S1[Mark Identity Compromised]
+    S2[View Revocation History]
+end
+
+%% =========================
+%% FLOW
+%% =========================
+W1 --> W2 --> O1 --> O2
+
+O2 --> OB1
+OB1 -->|No Identity| OB2
+OB2 --> D1
+OB1 -->|Has Identity| D1
+
+D1 --> D2 --> D3 --> D4
+
+D1 --> M1 --> D1
+M1 --> M2 --> D1
+
+D1 --> E1 --> E2 --> D3
+E2 --> E3 --> D3
+
+D1 --> S1 --> S2 --> D4
