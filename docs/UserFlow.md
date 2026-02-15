@@ -10,7 +10,7 @@ This document describes the **explicit user flow** exposed by the Mini DIT proto
 ## High-Level Flow Diagram
 
 ```mermaid
-flowchart LR
+flowchart TD
 %% =========================
 %% USER
 %% =========================
@@ -194,5 +194,3 @@ Users own their identity NFT and can transfer it between wallets while maintaini
 3. **Verifiers** read protocol data and apply custom trust rules to make decisions
 
 This architecture enables **decentralized identity** while allowing each application to define what "trust" means in their context.
-V5 -->|Manual Review| V8
-
