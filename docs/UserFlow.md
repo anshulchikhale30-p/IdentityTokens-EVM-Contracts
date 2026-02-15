@@ -236,22 +236,3 @@ Reject
 
 Manual Review
 
-Note:
-
-Mini DIT never decides trust — it only provides verifiable signals.
-
-Summary
-
-✔ Protocol stores facts
-
-✔ Endorsements are signals
-
-✔ Revocations are visible
-
-✔ Compromises are explicit
-
-❌ No trust score
-
-❌ No validity judgment
-
-❌ No central authorit
