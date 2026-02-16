@@ -1,0 +1,50 @@
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    lint-and-test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+              with:
+                  submodules: recursive
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "18"
+                  cache: "npm"
+
+            - name: Install Node dependencies
+              run: npm ci
+
+            - name: Prettier check (Solidity)
+              run: npm run sol-check-all
+
+            - name: Install Foundry
+              uses: foundry-rs/foundry-toolchain@v1
+
+            - name: Show Forge version
+              run: forge --version
+
+            - name: Run Forge build
+              run: forge build --sizes
+
+            - name: Run Forge tests
+              run: forge test -vvv
+
+            - name: Static Analysis (Slither)
+              uses: crytic/slither-action@v0.3.0
+              continue-on-error: true
+
+            - name: Install pre-commit
+              run: pip install pre-commit
+
+            - name: Run pre-commit hooks
+              run: pre-commit run --all-files

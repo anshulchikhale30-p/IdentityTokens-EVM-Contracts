@@ -1,0 +1,4 @@
+{
+    "detectors_to_exclude": "low-level-calls,unused-return",
+    "filter_paths": "lib"
+}

@@ -59,35 +59,35 @@
 
 TODO: In the checklist below, mark the items that have been completed and delete items that are not applicable to the current project:
 
-* [ ] The project has a logo.
-* [ ] The project has a favicon.
-* [ ] The protocol:
-   - [ ] has been described and formally specified in a paper.
-   - [ ] has had its main properties mathematically proven.
-   - [ ] has been formally verified.
-* [ ] The smart contracts:
-   - [ ] were thoroughly reviewed by at least two knights of The Stable Order.
-   - [ ] were deployed to:
-      - [ ] Ergo
-      - [ ] Cardano
-      - [ ] EVM Chains:
-        - [ ] Ethereum Classic
-        - [ ] Ethereum
-        - [ ] Polygon
-        - [ ] BSC
-        - [ ] Base
-* [ ] The mobile app:
-   - [ ] has an _About_ page containing the Stability Nexus's logo and pointing to the social media accounts of the Stability Nexus.
-   - [ ] is available for download as a release in this repo.
-   - [ ] is available in the relevant app stores.
-* [ ] The web frontend:
-   - [ ] has proper title and metadata.
-   - [ ] has proper open graph metadata, to ensure that it is shown well when shared in social media (Discord, Telegram, Twitter, LinkedIn).
-   - [ ] has a footer, containing the Stability Nexus's logo and pointing to the social media accounts of the Stability Nexus.
-   - [ ] is fully static and client-side.
-   - [ ] is deployed to Github Pages via a Github Workflow.
-   - [ ] is accessible through the https://TODO:PROJECT-NAME.stability.nexus domain.
-* [ ] the project is listed in [https://stability.nexus/protocols](https://stability.nexus/protocols).
+-   [ ] The project has a logo.
+-   [ ] The project has a favicon.
+-   [ ] The protocol:
+    -   [ ] has been described and formally specified in a paper.
+    -   [ ] has had its main properties mathematically proven.
+    -   [ ] has been formally verified.
+-   [ ] The smart contracts:
+    -   [ ] were thoroughly reviewed by at least two knights of The Stable Order.
+    -   [ ] were deployed to:
+        -   [ ] Ergo
+        -   [ ] Cardano
+        -   [ ] EVM Chains:
+            -   [ ] Ethereum Classic
+            -   [ ] Ethereum
+            -   [ ] Polygon
+            -   [ ] BSC
+            -   [ ] Base
+-   [ ] The mobile app:
+    -   [ ] has an _About_ page containing the Stability Nexus's logo and pointing to the social media accounts of the Stability Nexus.
+    -   [ ] is available for download as a release in this repo.
+    -   [ ] is available in the relevant app stores.
+-   [ ] The web frontend:
+    -   [ ] has proper title and metadata.
+    -   [ ] has proper open graph metadata, to ensure that it is shown well when shared in social media (Discord, Telegram, Twitter, LinkedIn).
+    -   [ ] has a footer, containing the Stability Nexus's logo and pointing to the social media accounts of the Stability Nexus.
+    -   [ ] is fully static and client-side.
+    -   [ ] is deployed to Github Pages via a Github Workflow.
+    -   [ ] is accessible through the https://TODO:PROJECT-NAME.stability.nexus domain.
+-   [ ] the project is listed in [https://stability.nexus/protocols](https://stability.nexus/protocols).
 
 ---
 
@@ -99,18 +99,18 @@ TODO:
 
 TODO:
 
-- Next.js 14+ (React)
-- TypeScript
-- TailwindCSS
-- shadcn/ui
+-   Next.js 14+ (React)
+-   TypeScript
+-   TailwindCSS
+-   shadcn/ui
 
 ### Blockchain
 
 TODO:
 
-- Wagmi
-- Solidity Smart Contracts
-- Ethers.js
+-   Wagmi
+-   Solidity Smart Contracts
+-   Ethers.js
 
 ---
 
@@ -120,9 +120,9 @@ TODO:
 
 TODO
 
-- Node.js 18+
-- npm/yarn/pnpm
-- MetaMask or any other web3 wallet browser extension
+-   Node.js 18+
+-   npm/yarn/pnpm
+-   MetaMask or any other web3 wallet browser extension
 
 ### Installation
 
@@ -172,16 +172,16 @@ We welcome contributions of all kinds! To contribute:
 1. Fork the repository and create your feature branch (`git checkout -b feature/AmazingFeature`).
 2. Commit your changes (`git commit -m 'Add some AmazingFeature'`).
 3. Run the development workflow commands to ensure code quality:
-   - `npm run format:write`
-   - `npm run lint:fix`
-   - `npm run typecheck`
+    - `npm run format:write`
+    - `npm run lint:fix`
+    - `npm run typecheck`
 4. Push your branch (`git push origin feature/AmazingFeature`).
 5. Open a Pull Request for review.
 
 If you encounter bugs, need help, or have feature requests:
 
-- Please open an issue in this repository providing detailed information.
-- Describe the problem clearly and include any relevant logs or screenshots.
+-   Please open an issue in this repository providing detailed information.
+-   Describe the problem clearly and include any relevant logs or screenshots.
 
 We appreciate your feedback and contributions!
 
