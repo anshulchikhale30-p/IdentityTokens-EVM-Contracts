@@ -105,7 +105,7 @@ Clone the project and navigate into the root directory:
 
 ```bash
 git clone https://github.com/StabilityNexus/IdentityTokens-EVM-Contracts.git
-cd identitytokens-evm-contracts
+cd IdentityTokens-EVM-Contracts
 ```
 
 ### 2. Install Dependencies
