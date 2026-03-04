@@ -65,7 +65,7 @@ reviews:
   changed_files_summary: true
 
   # Automatically request changes on the PR (just leave comments)
-  request_changes_workflow: true
+  request_changes_workflow: false
 
   # Pre-merge checks to enforce before merging PRs
   pre_merge_checks:
