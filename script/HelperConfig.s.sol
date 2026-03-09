@@ -1,9 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-import {Script} from "forge-std/Script.sol";
+import { Script } from "forge-std/Script.sol";
 
 contract HelperConfig is Script {
-    struct NetworkConfig { uint256 deployerKey; }
+    struct NetworkConfig {
+        uint256 deployerKey;
+    }
     NetworkConfig public activeNetworkConfig;
 
     constructor() {

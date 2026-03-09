@@ -1,14 +1,21 @@
 {
-  "name": "identity-tokens-evm",
-  "version": "1.0.0",
-  "license": "MIT",
-  "scripts": {
-    "build": "forge build",
-    "test": "forge test",
-    "deploy": "forge script script/Deploy.s.sol:Deploy --broadcast",
-    "format": "forge fmt"
-  },
-  "dependencies": {
-    "@openzeppelin/contracts": "^5.0.0"
-  }
+    "name": "identity-tokens-evm",
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+        "build": "forge build",
+        "deploy": "forge script script/Deploy.s.sol:Deploy --broadcast",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "sol-fmt": "prettier --write --plugin=prettier-plugin-solidity",
+        "sol-fmt-all": "prettier --write \"**/*.sol\" --plugin=prettier-plugin-solidity",
+        "sol-check": "prettier --check --plugin=prettier-plugin-solidity",
+        "sol-check-all": "prettier --check \"**/*.sol\" --plugin=prettier-plugin-solidity"
+    },
+    "dependencies": {
+        "@openzeppelin/contracts": "^5.0.0"
+    },
+    "devDependencies": {
+        "prettier": "^3.8.1",
+        "prettier-plugin-solidity": "^2.2.1"
+    }
 }
