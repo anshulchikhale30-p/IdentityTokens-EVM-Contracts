@@ -255,7 +255,7 @@ reviews:
         - The tests are not tautological 
 
     # Solidity test files
-    - path: "**/*.test.{sol}"
+    - path: "**/*.t.sol"
       instructions: |
         Review test files for:
         - Comprehensive coverage of contract behavior.
